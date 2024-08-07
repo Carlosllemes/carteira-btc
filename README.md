@@ -28,7 +28,7 @@ Utilizaremos Node.js para criar o gerador de carteiras e importaremos para o Ele
 
 Clone este repositório e instale as dependências necessárias:
 
-#npm install bip39 bip32@0.2.0.6 bitcoinjs-lib --save
+`#npm install bip39 bip32@0.2.0.6 bitcoinjs-lib --save`
 
 
 ### Gerando uma Carteira
