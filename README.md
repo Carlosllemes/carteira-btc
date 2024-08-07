@@ -30,7 +30,6 @@ Clone este repositório e instale as dependências necessárias:
 
 `#npm install bip39 bip32@0.2.0.6 bitcoinjs-lib --save`
 
-
 ### Gerando uma Carteira
 
 Para gerar uma nova carteira, execute o arquivo `gerarCarteira.js`.

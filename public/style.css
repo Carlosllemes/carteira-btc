@@ -1,0 +1,36 @@
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+
+    animation: wave 10s infinite;
+    background-size: 400% 400%;
+}
+
+@keyframes wave {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 50% 75%;
+    }
+
+    100% {
+        background-position: 75% 100%;
+    }
+}
+
+.card {
+    width: 100%;
+    max-width: 500px;
+}
+
+.pacifico-regular {
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+}

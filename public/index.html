@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Carteira Bitcoin</title>
+    <!-- Link para o CSS do Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <!-- Estilos customizados -->
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body>
+    <div class="container text-center">
+        <h1 class="text-center mb-4">Gerador de Carteira Bitcoin</h1>
+        <button id="generateWalletBtn" class="btn btn-primary mb-4">Gerar Carteira</button>
+        <div id="walletInfo" class="card" style="display: none;">
+            <div class="card-body">
+                <h2 class="card-title">Carteira Gerada</h2>
+                <p class="card-text"><strong>Endereço:</strong> <span id="btcAddress"></span></p>
+                <p class="card-text"><strong>Chave Privada:</strong> <span id="privateKey"></span></p>
+                <p class="card-text"><strong>Seed:</strong> <span id="seed"></span></p>
+            </div>
+        </div>
+    </div>
+    <!-- Link para o JavaScript do Bootstrap e dependências -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+
+</html>
