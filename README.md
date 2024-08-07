@@ -45,6 +45,14 @@ Para gerar uma nova carteira, execute o arquivo `gerarCarteira.js`.
 
 Depois de importar sua carteira para o Electrum, você pode começar a enviar e receber transações de bitcoin.
 
+### Como conseguir satoshis fake
+
+https://coinfaucet.eu/en/btc-testnet/
+
+### Onde validar as transações
+
+https://blockstream.info/testnet/search?q=address=seu_endereco
+
 ## Contribuição
 
 1. Fork este repositório.
