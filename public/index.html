@@ -46,8 +46,8 @@
             let size = Math.random() * 50;
 
             createElement.style.animation = 'bubble 6s linear infinite';
-            createElement.style.height = 180 + size + 'px';
-            createElement.style.width = 180 + size + 'px';
+            createElement.style.height = 70 + size + 'px';
+            createElement.style.width = 70 + size + 'px';
             createElement.style.left = Math.random() * innerWidth + 'px';
             createElement.style.boxShadow = `inset 0 0 60px 10px rgba(135,206,235,1)`;
             createImage.setAttribute('src', "https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=032");
@@ -63,41 +63,50 @@
         }
 
         function avoidModalCollision(bubble) {
-            let modal = document.getElementById('walletInfo');
-            if (modal.style.display !== 'none') {
-                let interval = setInterval(() => {
-                    let bubbleRect = bubble.getBoundingClientRect();
-                    let modalRect = modal.getBoundingClientRect();
+    let modal = document.querySelector('section');
+    if (modal.style.display !== 'none') {
+        let interval = setInterval(() => {
+            let bubbleRect = bubble.getBoundingClientRect();
+            let modalRect = modal.getBoundingClientRect();
 
-                    // Verifica se a bolha está dentro do raio do modal
-                    if (
-                        bubbleRect.bottom > modalRect.top &&
-                        bubbleRect.top < modalRect.bottom &&
-                        bubbleRect.right > modalRect.left &&
-                        bubbleRect.left < modalRect.right
-                    ) {
-                        // Se a bolha está no lado esquerdo do modal, mova-a para a esquerda
-                        if (bubbleRect.left < modalRect.left) {
-                            bubble.style.left = `${bubbleRect.left - 5}px`;
-                        }
-                        // Se a bolha está no lado direito do modal, mova-a para a direita
-                        else if (bubbleRect.right > modalRect.right) {
-                            bubble.style.left = `${bubbleRect.left + 5}px`;
-                        }
+            // Calcula a posição central do modal
+            let modalCenterX = modalRect.left + modalRect.width / 2;
 
-                        // Congela a bolha enquanto ela ainda estiver dentro do modal
-                        bubble.style.animationPlayState = 'paused';
-                    } else {
-                        // Retoma a animação da bolha quando ela estiver fora do modal
-                        bubble.style.animationPlayState = 'running';
-                    }
-                }, 10);
+            // Calcula a posição central da bolha
+            let bubbleCenterX = bubbleRect.left + bubbleRect.width / 2;
 
-                setTimeout(() => {
-                    clearInterval(interval);
-                }, 4000); // Mesma duração da animação da bolha
+            // Verifica se a bolha está dentro do raio do modal
+            if (
+                bubbleRect.bottom > modalRect.top &&
+                bubbleRect.top < modalRect.bottom &&
+                bubbleRect.right > modalRect.left &&
+                bubbleRect.left < modalRect.right
+            ) {
+                // Verifica a posição da bolha em relação ao centro do modal
+                let offsetX = bubbleCenterX - modalCenterX;
+
+                // Se a bolha está à esquerda do centro do modal, mova-a para a esquerda
+                if (offsetX < 0) {
+                    bubble.style.left = `${bubbleRect.left - 1}px`;
+                }
+                // Se a bolha está à direita do centro do modal, mova-a para a direita
+                else if (offsetX > 0) {
+                    bubble.style.left = `${bubbleRect.left + 1}px`;
+                }
+
+                // Congela a bolha enquanto ela ainda estiver dentro do modal
+                bubble.style.animationPlayState = 'paused';
+            } else {
+                // Retoma a animação da bolha quando ela estiver fora do modal
+                bubble.style.animationPlayState = 'running';
             }
-        }
+        }, 10);
+
+        setTimeout(() => {
+            clearInterval(interval);
+        }, 4000); // Mesma duração da animação da bolha
+    }
+}
 
         document.getElementById('generateWalletBtn').addEventListener('click', function () {
             let walletInfo = document.getElementById('walletInfo');
@@ -109,7 +118,7 @@
 
         setInterval(() => {
             createBubble();
-        }, 1000);
+        }, 100);
 
     </script>
 </footer>
