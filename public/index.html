@@ -12,27 +12,106 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <!-- Estilos customizados -->
     <link rel="stylesheet" href="style.css">
-    
+
 </head>
 
 <body>
-    <div class="container text-center">
-        <h1 class="text-center mb-4">Gerador de Carteira Bitcoin</h1>
-        <button id="generateWalletBtn" class="btn btn-primary mb-4">Gerar Carteira</button>
-        <div id="walletInfo" class="card" style="display: none;">
-            <div class="card-body">
-                <h2 class="card-title">Carteira Gerada</h2>
-                <p class="card-text"><strong>Endereço:</strong> <span id="btcAddress"></span></p>
-                <p class="card-text"><strong>Chave Privada:</strong> <span id="privateKey"></span></p>
-                <p class="card-text"><strong>Seed:</strong> <span id="seed"></span></p>
+    <div id="bubble">
+        <section class="container text-center">
+            <h1 class="text-center mb-4">Gerador de Carteira Bitcoin</h1>
+            <button id="generateWalletBtn" class="btn btn-primary mb-4 primary-color">Gerar Carteira</button>
+            <div id="walletInfo" class="card" style="display: none;">
+                <div class="card-body">
+                    <h2 class="card-title">Carteira Gerada</h2>
+                    <p class="card-text"><strong>Endereço:</strong> <strong id="btcAddress"></strong></p>
+                    <p class="card-text"><strong>Chave Privada:</strong> <strong id="privateKey"></strong></p>
+                    <p class="card-text"><strong>Seed:</strong> <strong id="seed"></strong></p>
+                </div>
             </div>
-        </div>
+        </section>
     </div>
     <!-- Link para o JavaScript do Bootstrap e dependências -->
+
+</body>
+<footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/script.js"></script>
-</body>
+    <script>
+        function createBubble() {
+            let section = document.getElementById('bubble');
+            let createElement = document.createElement('span');
+            let createImage = document.createElement('img');
+            let size = Math.random() * 50;
+
+            createElement.style.animation = 'bubble 6s linear infinite';
+            createElement.style.height = 180 + size + 'px';
+            createElement.style.width = 180 + size + 'px';
+            createElement.style.left = Math.random() * innerWidth + 'px';
+            createElement.style.boxShadow = `inset 0 0 60px 10px rgba(135,206,235,1)`;
+            createImage.setAttribute('src', "https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=032");
+
+            section.appendChild(createElement);
+            createElement.appendChild(createImage);
+
+            setTimeout(() => {
+                createElement.remove();
+            }, 4000);
+
+            avoidModalCollision(createElement);
+        }
+
+        function avoidModalCollision(bubble) {
+            let modal = document.getElementById('walletInfo');
+            if (modal.style.display !== 'none') {
+                let interval = setInterval(() => {
+                    let bubbleRect = bubble.getBoundingClientRect();
+                    let modalRect = modal.getBoundingClientRect();
+
+                    // Verifica se a bolha está dentro do raio do modal
+                    if (
+                        bubbleRect.bottom > modalRect.top &&
+                        bubbleRect.top < modalRect.bottom &&
+                        bubbleRect.right > modalRect.left &&
+                        bubbleRect.left < modalRect.right
+                    ) {
+                        // Se a bolha está no lado esquerdo do modal, mova-a para a esquerda
+                        if (bubbleRect.left < modalRect.left) {
+                            bubble.style.left = `${bubbleRect.left - 5}px`;
+                        }
+                        // Se a bolha está no lado direito do modal, mova-a para a direita
+                        else if (bubbleRect.right > modalRect.right) {
+                            bubble.style.left = `${bubbleRect.left + 5}px`;
+                        }
+
+                        // Congela a bolha enquanto ela ainda estiver dentro do modal
+                        bubble.style.animationPlayState = 'paused';
+                    } else {
+                        // Retoma a animação da bolha quando ela estiver fora do modal
+                        bubble.style.animationPlayState = 'running';
+                    }
+                }, 10);
+
+                setTimeout(() => {
+                    clearInterval(interval);
+                }, 4000); // Mesma duração da animação da bolha
+            }
+        }
+
+        document.getElementById('generateWalletBtn').addEventListener('click', function () {
+            let walletInfo = document.getElementById('walletInfo');
+            walletInfo.style.display = 'flex';
+            setTimeout(() => {
+                walletInfo.style.display = 'none';
+            }, 50000);
+        });
+
+        setInterval(() => {
+            createBubble();
+        }, 1000);
+
+    </script>
+</footer>
 
 </html>
